@@ -8,69 +8,54 @@
 <!--
 Обязательное задание.
 
-Необходимо реализовать четыре функции, каждая функция должна принимать по два
-числа и выполнять одну из операций (каждая функция выполняет одну из них):
-1. Сложение
-2. Разность
-3. Умножение
-4. Деление
-
-Необходимо сделать так, чтобы функция вернула число, например выражение
-`console.log(sum(2, 6));` должно вывести число 8 в консоль (sum - функция
-сложения в данном примере, ваши названия функций могут отличаться).
-
-Округлять значения, которые возвращают функции не нужно, однако, обратите
-внимание на разность, функция должна вычесть из большего числа меньшее, либо
-вернуть 0, если числа равны.
-
-Функциям всегда передаются корректные числа, проверки на NaN, Infinity делать
-не нужно.
-
-Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+1. Необходимо вывести в консоль массив продуктов в котором есть хоть одна
+фотография используя метод filter. Исходные данные - массив products.
+2. Необходимо отсортировать массив products используя метод sort по цене,
+начиная с самой маленькой, заканчивая самой большой ценой, после чего вывести
+отсортированный массив в консоль.
 -->
 <script>
   "use strict";
 
-  /**
-   * Сумму.
-   * @param {number} y - Первое число.
-   * @param {number} x - Второе число.
-   * @return {number} Сумма чисел.
-   */
-  function sum(x, y) {
-    return x + y;
-  }
-  
-  /**
-   * Разность.
-   * @param {number} y - Первое число.
-   * @param {number} x - Второе число.
-   * @return {number} Разность чисел.
-   */
-  function diff(x, y) {
-    return Math.abs(x - y);
-  }
-  
-  /**
-   * Произведение.
-   * @param {number} y - Первое число.
-   * @param {number} x - Второе число.
-   * @return {number} Произведение чисел.
-   */
-  function multip(x, y) {
-    return x * y;  
-  }
-     
-  /**
-   * Частное.
-   * @param {number} y - Первое число.
-   * @param {number} x - Второе число.
-   * @return {number} Частное чисел.
-   */
-  function div(x, y) {
-    return x / y;  
-  }
+  const products = [
+    {
+      id: 3,
+      price: 127,
+      photos: [
+        "1.jpg",
+        "2.jpg",
+      ],
+    },
+    {
+      id: 5,
+      price: 499,
+      photos: [],
+    },
+    {
+      id: 10,
+      price: 26,
+      photos: [
+        "3.jpg",
+      ],
+    },
+    {
+      id: 8,
+      price: 78,
+    },
+  ];
 
+  
+  /*const arrPhotos = products.filter(function(product) {	
+	return product.photos && product.photos.length !== 0;	
+  });*/
+  const arrPhotos = products.filter(product => product.photos && product.photos.length !== 0);
+  console.log(arrPhotos);
+  
+ /* products.sort(function(product1, product2) {		
+	return 	product1.price - product2.price;
+  });*/
+  products.sort((product1, product2) => product1.price - product2.price);
+  console.log(products);
 </script>
 </body>
 </html>

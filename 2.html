@@ -8,108 +8,86 @@
 <!--
 Обязательное задание.
 
-Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
-Необходимо создать функцию-конструктор/класс для поста в социальной сети.
-Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
-Пост должен хранить:
-1. Автора поста (имени достаточно).
-2. Текст поста.
-3. Дату и время последнего изменения поста.
-Данные автора поста и текст поста необходимо передавать при создании
-экземпляра объекта.
-Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
-менять текст поста.
-
----
-
-Необходимо создать функцию-конструктор/класс для закрепленного поста в
-социальной сети.
-Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
-Закрепленный пост должен наследоваться от обычного поста.
-Данные автора поста и текст поста необходимо передавать при создании
-экземпляра объекта.
-Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
-будет лежать значение false (это свойство будет обозначать, будет ли наш
-закрепленный пост подсвечен).
-У экземпляров объекта закрепленного поста должен быть метод с названием
-`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
-(будет менять свойство `highlighted`).
-
----
-
-Подсказки:
-1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
-2. Обратите внимание что пост хранит "дату и время последнего изменения
-поста", это значит что если пост кто-то изменит (например вызовет какой-то
-метод, который изменит что-то в посте), дата и время последнего изменения
-поста также должна измениться.
-3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
-что-нибудь пропустить.
-4. Если непонятно условие - задайте вопрос.
+Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
+стирать, код с решением задачи пишем под комментарием.
 -->
+
+<p class="dropdown">Привет :)</p>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="menu dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+
 <script>
   "use strict";
 
-  function PostES5 (author, text) {
-    this.author = author;
-    this.text = text;
-    this.date = new Date();
-  }
-  PostES5.prototype.edit = function(text) {
-    this.text = text;
-    this.date = new Date();
-  }
-  /*const postES5 = new PostES5('Саша', 'Доброго времени суток.');
-  console.log(postES5);
-  postES5.edit('Изменим текст.');
-  console.log(postES5);*/
+  /*
+  1. Ко всем элементам, имеющим класс "dropdown-item" добавить еще один класс
+  "super-dropdown", необходимо использовать методы forEach и querySelectorAll и
+  свойство classList у элементов.
+   */
+  const dropdowns = document.querySelectorAll( ".dropdown-item" );
+  dropdowns.forEach(function(dropdown) {
+    dropdown.classList.add('super-dropdown');
+  });
 
-  class PostES6 {
-    constructor(author, text){
-      this.author = author;
-      this.text = text;
-      this.date = new Date();
-    }
-    edit(text) {
-      this.text = text;
-      this.date = new Date();
-    }
-  }
-  /*const postES6 = new PostES6('Саша', 'Доброго времени суток.');
-  console.log(postES6);
-  postES5.edit('Изменим текст.');
-  console.log(postES6);*/
+  /*
+  2. У элемента с классом btn необходимо убрать класс "btn-secondary", если он
+  присутствует у этого элемента, либо добавить, если такого класса у элемента
+  не было.
+   */
+  const buttonEl = document.querySelector('.btn');
+  buttonEl.classList.toggle('btn-secondary');
+  //console.log(document.body);
 
-  function AttachedPostES5 (author, text) {
-    PostES5.call(this, author, text)
-    this.highlighted = false;
-  }
-  AttachedPostES5.prototype = Object.create(PostES5.prototype);
-  AttachedPostES5.prototype.constructor = AttachedPostES5;
+  /*
+  3. Необходимо удалить класс "dropdown-menu" у элемента, у которого
+  присутствует класс "menu".
+   */
+  document.querySelector('.menu').classList.remove('dropdown-menu');
 
-  AttachedPostES5.prototype.makeTextHighlighted = function() {
-    this.highlighted = true;
-    this.date = new Date();
-  }
-  const attachedPostES5 = new AttachedPostES5('Саша', 'Доброго времени суток.');
-  console.log(attachedPostES5);
-  attachedPostES5.makeTextHighlighted();
-  attachedPostES5.edit('Для закрепленного поста социальной сети.')
-  console.log(attachedPostES5);
+  /*
+  4. Используя метод insertAdjacentHTML добавьте после div'a с классом
+  "dropdown" следующую разметку:
+    <a href="#">link</a>
+   */
+  document.querySelector('div.dropdown')
+          .insertAdjacentHTML('afterend', '<a href="#">link</a>');
 
-  class AttachedPostES6 extends PostES6 {
-    highlighted = false;
+  /*
+  5. У элемента с id "dropdownMenuButton" замените id на "superDropdown".
+   */
+  document.querySelector('#dropdownMenuButton').id = 'superDropdown';
 
-    makeTextHighlighted() {
-      this.highlighted = true;
-      this.date = new Date();
-    }
-  }
-  const attachedPostES6 = new AttachedPostES6('Саша', 'Доброго времени суток.');
-  console.log(attachedPostES6);
-  attachedPostES6.makeTextHighlighted();
-  attachedPostES6.edit('Для закрепленного поста социальной сети.');
-  console.log(attachedPostES6);
+  /*
+  6. Добавьте атрибут data-dd со значением 3 элементу у которого существует
+  атрибут "aria-labelledby" равный "dropdownMenuButton" используя dataset.
+   */
+  document.querySelector('[aria-labelledby="dropdownMenuButton"]')
+  .dataset.dd = "3";
+
+  /*
+  7. Удалите атрибут type у элемента с классом "dropdown-toggle".
+   */
+  document.querySelector('.dropdown-toggle').removeAttribute('type');
+
+  /*
+  8. Выведите в консоль все имеющиеся атрибуты и их значения тега у которого
+  есть все два класса btn и dropdown-toggle.
+  Вывод каждого атрибута и значений должен выглядеть следующим образом (пример):
+  Атрибут "class" содержит значение "btn btn-secondary dropdown-toggle"
+   */
+  const attributes = document.querySelector('.btn.dropdown-toggle').attributes;
+  for(const attribute of attributes) {
+   console.log('Атрибут "${attribute.name}" содержит значение "${attribute.value}"')
+ }
 </script>
 </body>
 </html>

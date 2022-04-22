@@ -2,7 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Homework</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <style>
+    i {
+      font-size: 50px;
+    }
+    .golden {
+      color: gold;
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -12,129 +22,65 @@
 стирать, код с решением задачи пишем под комментарием.
 -->
 
-<p class="super_element">Привет</p>
-
-<img src="https://placeimg.com/50/50/animals" alt="">
-<img src="https://placeimg.com/50/50/arch" alt="">
-<img src="https://placeimg.com/50/50/nature" alt="">
-<img src="https://placeimg.com/50/50/people" alt="">
-<img src="https://placeimg.com/50/50/tech" alt="">
-<img src="https://placeimg.com/50/50/tech/grayscale" alt="">
-<img src="https://placeimg.com/50/50/tech/sepia" alt="">
-
-<br>
-
-<button>Кнопка</button>
-<button class="super_element">Кнопка с классом btn</button>
-<button>Кнопка</button>
-
-<br>
-
-<textarea></textarea>
-
-<br>
-
-<ul>
-  <li>
-    <button>Кнопка 1</button>
-  </li>
-  <li>
-    <button>Кнопка 2</button>
-  </li>
-  <li>
-    <button>Кнопка 3</button>
-  </li>
-  <li>
-    <button>Кнопка 4</button>
-  </li>
-</ul>
+<div class="stars_container">
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+</div>
 
 <script>
   "use strict";
 
   /*
-  1. Необходимо вывести сообщение в консоль "все теги прогрузились", когда все
-  теги будут созданы браузером.
+  1. При наведении на любую из звезд, данной звезде должен ставиться класс
+  golden, также такой класс должен ставиться всем звездам до нее слева.
   */
-  document.addEventListener(
-    "DOMContentLoaded", () => {
-    console.log('все теги прогрузились')
-  });
-
-  /*
-  2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все
-  ресурсы страницы будут загружены.
-  */
-  window.addEventListener("load", () => {
-    console.log('страница загрузилась');
-  });
-
-  /*
-  3. При клике на какой-либо тег на странице в консоль должно выводиться
-  сообщение наподобие:
-  Класс "super_element" присутствует в элементе "div".
-  сообщение должно определять присутствует или отсутствует класс "super_element"
-  у элемента, а также выводить в нижнем регистре верный тег в данной строке, по
-  которому был совершен клик.
-  Необходимо использовать делегирование.
-  */
-  document.addEventListener('click', event => {
-    let isPresent = 'присутствует';
-    if (!event.target.classList.contains('super_element')) {
-      isPresent = 'отсутствует';
-    }
-    const tagName = event.target.tagName.toLowerCase();
-    console.log(`Класс "super_element" ${isPresent} в элементе "${tagName}".`);
-  });
-
-  /*
-  4. Сделайте, чтобы при наведении на textarea в консоли появлялось сообщение:
-  "Вы навели на textarea."
-   */
-  document.querySelector('textarea').addEventListener('mouseover', () =>
-    console.log("Вы навели на textarea.")
-  );
-
-  /*
-  5. Необходимо повесить событие клика на тег ul. В обработчике события в
-  консоль необходимо выводить текст, который записан внутри элемента кнопки,
-  по которой был произведен клик.
-  Если клик был не по кнопке, то ничего выводить не нужно.
-  Необходимо использовать делегирование.
-   */
-
-  document.querySelector('ul').addEventListener('click', event => {
-    //console.log(event);
-    if (event.target.tagName !== 'BUTTON') {
+  const iEls = document.querySelectorAll('.fas');
+  document.querySelector('.stars_container').addEventListener('mouseover', event => {
+    if (!event.target.classList.contains('fas')) {
       return;
     }
-    console.log(event.target.innerText);  // можно использовать innerHTML, textContent
-  });
+    for(const iEl of iEls ) {
+      iEl.classList.add('golden');
+      if (iEl === event.target) {
+        break;
+      }
+    }
+  })
 
   /*
-  6. Вопрос: Почему в console.log пишется сначала текст из 5 задания и только
-  потом выводится текст из 3 задания, если мы кликаем по кнопкам в ul?
-  Ответ необходимо написать здесь же, под этим комментарием, своими словами.
-  */
-  /* Здесь процесс всплытие. Сначало от документа HTML тега body и т.д. спускаемся
-    вниз до элемента на который был произведен "клик" ul, в консоль выводится з5.
-    Затем подымаемся вверх вплоть до документа окна window, выводим в консоль
-    з3.
-  */
-
-  /*
-  7. С помощью JS необходимо изменить цвет заднего фона каждого второго тега li.
+  2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
+  задания должны быть удалены.
    */
- /* document.querySelectorAll('li:nth-child(2n)').forEach(function(liEl){
-    liEl.style.backgroundColor = 'red';
-  });*/
 
-  document.querySelectorAll('li').forEach(function(liEl, index){
-    if (index % 2) {
-      liEl.style.backgroundColor = 'red';
+  document.querySelector('.stars_container').addEventListener('mouseout', event => {
+    if (!event.target.classList.contains('fas')) {
+      return;
+    }
+    for(const iEl of iEls ) {
+      iEl.classList.remove('golden');
+      if (iEl === event.target) {
+        break;
+      }
+    }
+  })
+
+  /*
+  3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
+  звезды (временно могут становиться черными). Почему так? Напишите словами.
+  Можем ли мы это исправить? Если да, то предложите решение.
+  */
+  /*  Каждая пара тег <i> переходят на другую строку. Между ними находится пробел.
+  Как только мы его уберем, ситуация изменится. Чтобы убрать пробелы, нужно теги
+  выстроить в одну строку.
+   */
+  document.querySelector('.stars_container').childNodes.forEach(node => {
+    if (node.nodeName === '#text') {
+      node.remove();
     }
   });
-
 </script>
 </body>
 </html>

@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
+  <style>
+    .product {
+      width: 200px;
+      padding: 10px;
+      float: left;
+      margin-right: 30px;
+      box-shadow: 0 0 4px black;
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -11,90 +20,75 @@
 Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
 стирать, код с решением задачи пишем под комментарием.
 -->
-
-<a href="#" class="card-link">Card link</a>
-<a href="#" class="card-link">Another link</a>
-
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title" data-number="100">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text" data-number="50">
-      Some quick example text to build on the card title and make up the bulk of the card's
-      content.
-    </p>
-    <a href="#" id="super_link" class="card-link">Card link</a>
-    <a href="#" class="card-link" data-number="50">Another link</a>
-  </div>
+<div class="product">
+  <div class="productName">Товар 1</div>
+  <img src="https://picsum.photos/id/367/200/300" alt="">
+  <button>В корзину</button>
+</div>
+<div class="product">
+  <div class="productName">Товар 2</div>
+  <img src="https://picsum.photos/id/425/200/300" alt="">
+  <button>В корзину</button>
+</div>
+<div class="product">
+  <div class="productName">Товар 3</div>
+  <img src="https://picsum.photos/id/429/200/300" alt="">
+  <button>В корзину</button>
 </div>
 
 <script>
   "use strict";
 
   /*
-  1. Найти по id, используя getElementById, элемент с id равным "super_link" и
-  вывести этот элемент в консоль.
+  1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
-  const ael = document.getElementById('super_link');
-  console.log(ael);
- 
-  /*
-  2. Внутри всех элементов на странице, которые имеют класс "card-link",
-  поменяйте текст внутри элемента на "ссылка".
-   */
-  const linkEl = document.querySelectorAll('.card-link');
-  //console.log(linkEl);
-  console.log(linkEl.innerText = 'ссылка');
-  //console.log(linkEl.textContent = 'ссылка');
-  //console.log(linkEl.innerHTML = 'ссылка');
-  
-  /*
-  3. Найти все элементы на странице с классом "card-link", которые лежат в
-  элементе с классом "card-body" и вывести полученную коллекцию в консоль.
-   */
-  const divEl = document.querySelector('.card-body');
-  //console.log(divEl);
-  console.log(divEl.querySelectorAll('.card-link'));
-  const nodeList = divEl.querySelectorAll('.card-link')    
-  for (let i = 0; i < nodeList.length; i++) {
-    console.log(nodeList[i]);
-  }
-  /*
-  4. Найти первый попавшийся элемент на странице у которого есть атрибут
-  data-number со значением 50 и вывести его в консоль.
-   */
-  console.log('---------------'); 
-  //const aEl = document.querySelector('.card-body .card-link:last-child');
-  //console.log(aEl);
-  console.log(document.querySelector('[data-number = "50"]'));
+  const divEls = document.querySelectorAll('.productName');
+  divEls.forEach(divEl => divEl.style.fontSize = '24px');
 
   /*
-  5. Выведите содержимое тега title в консоль.
+  2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
-  console.log(document.title);
+  document.querySelectorAll('.product')
+  .forEach(divEl => divEl.style.marginRight = '50px');
 
   /*
-  6. Получите элемент с классом "card-title" и выведите его родительский узел
-  в консоль.
+  3. При клике на кнопку "В корзину" название кнопки должно поменяться на
+  "Добавлено" и кнопка должна стать неактивной.
    */
-   const h5El = document.querySelector('.card-title');
-  console.log(h5El.parentElement);
+  /*const buttonEls = document.querySelectorAll('button');
+  buttonEls.forEach(button =>
+  button.addEventListener('click', () =>{
+    button.textContent = 'Добавлено';
+    button.disabled = true;
+  })
+  );*/
+  document.body.addEventListener('click', (event) =>{
+    if (event.target.tagName !== 'BUTTON') {
+      retutrn;
+    }
+    event.target.textContent = 'Добавлено';
+    event.target.disabled = true;
+  });
 
   /*
-  7. Создайте тег `p`, запишите внутри него текст "Привет" и добавьте созданный
-  тег в начало элемента, который имеет класс "card".
+  4. Создайте полную (глубокую) копию элемента с классом product, измените в
+  этой копии путь до картинки на:
+  https://picsum.photos/id/1080/200/300
+  Поставьте название товара в данной копии "Товар 4" и замените последний
+  отображенный товар на странице на созданную копию. У данной копии также
+  должен правильно работать код из 3-го задания.
    */
-  const div1El = document.querySelector('.card');
-  //console.log(div1El);
-  const pTag = document.createElement('p');
-  pTag.textContent = 'Привет';
-  console.log(div1El.insertAdjacentElement('beforebegin', pTag));
-  /*Как я понял метод prepend() библиотеки jQuery*/
- 
- /*
-  8. Удалите тег h6 на странице.
+  const divs = document.querySelectorAll('.productName')
+  const clone = document.querySelector('.product').cloneNode(true);
+  clone.querySelector('img').src = 'https://picsum.photos/id/1080/200/300';
+  clone.querySelector('.productName').textContent = 'Товар 4';
+  document.querySelector('.product:last-of-type').replaceWith(clone);
+
+  /*
+  5. По истечению 2 секунд с момента открытия страницы первый товар должен быть
+  удален из html.
    */
-  document.querySelector('h6').remove();
+   setTimeout(() =>  document.querySelector('.product').remove(), 2000);
 
 </script>
 </body>
